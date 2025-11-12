@@ -13,6 +13,8 @@ A fast, extensible CLI tool written in Go.
 
 ### Quick Install (Recommended)
 
+**Note:** Install scripts require the repository to be published on GitHub with at least one release.
+
 **Linux/macOS:**
 
 ```bash

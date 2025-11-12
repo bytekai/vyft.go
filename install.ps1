@@ -7,8 +7,22 @@ $BINARY_NAME = "vyft"
 $VERSION = if ($env:VYFT_VERSION) { $env:VYFT_VERSION } else { "latest" }
 
 function Get-LatestVersion {
-    $response = Invoke-RestMethod -Uri "https://api.github.com/repos/${REPO}/releases/latest"
-    return $response.tag_name
+    try {
+        $response = Invoke-RestMethod -Uri "https://api.github.com/repos/${REPO}/releases/latest" -ErrorAction Stop
+        return $response.tag_name
+    }
+    catch {
+        Write-Error "Could not fetch latest version from GitHub."
+        Write-Host "This may mean:" -ForegroundColor Yellow
+        Write-Host "  1. The repository doesn't exist yet or isn't public"
+        Write-Host "  2. No releases have been published yet"
+        Write-Host "  3. You're offline or GitHub is unreachable"
+        Write-Host ""
+        Write-Host "Please install from source instead:"
+        Write-Host "  git clone https://github.com/${REPO}.git"
+        Write-Host "  cd vyft && go build -o vyft"
+        exit 1
+    }
 }
 
 function Get-DownloadUrl {
@@ -52,11 +66,21 @@ function Install-Vyft {
     Write-Host "Downloading ${BINARY_NAME} ${VERSION}..."
     
     try {
-        Invoke-WebRequest -Uri $downloadUrl -OutFile $installPath -UseBasicParsing
+        Invoke-WebRequest -Uri $downloadUrl -OutFile $installPath -UseBasicParsing -ErrorAction Stop
         Write-Host "Installed ${BINARY_NAME} to ${installPath}"
     }
     catch {
-        Write-Error "Failed to download or install: $_"
+        Write-Error "Failed to download or install ${BINARY_NAME}"
+        Write-Host "URL: $downloadUrl" -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "This may mean:" -ForegroundColor Yellow
+        Write-Host "  1. The release ${VERSION} doesn't exist"
+        Write-Host "  2. The binary for ${os}/${arch} isn't available"
+        Write-Host "  3. You're offline or GitHub is unreachable"
+        Write-Host ""
+        Write-Host "Please install from source instead:"
+        Write-Host "  git clone https://github.com/${REPO}.git"
+        Write-Host "  cd vyft && go build -o vyft"
         exit 1
     }
     

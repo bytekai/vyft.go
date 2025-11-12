@@ -26,9 +26,32 @@ detect_arch() {
 }
 
 get_latest_version() {
-    curl -s "https://api.github.com/repos/${REPO}/releases/latest" | \
-        grep '"tag_name":' | \
-        sed -E 's/.*"([^"]+)".*/\1/'
+    local response
+    response=$(curl -sf "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null)
+    
+    if [ $? -ne 0 ] || [ -z "$response" ]; then
+        echo "Error: Could not fetch latest version from GitHub." >&2
+        echo "This may mean:" >&2
+        echo "  1. The repository doesn't exist yet or isn't public" >&2
+        echo "  2. No releases have been published yet" >&2
+        echo "  3. You're offline or GitHub is unreachable" >&2
+        echo "" >&2
+        echo "Please install from source instead:" >&2
+        echo "  git clone https://github.com/${REPO}.git" >&2
+        echo "  cd vyft && go build -o vyft" >&2
+        exit 1
+    fi
+    
+    local version
+    version=$(echo "$response" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    
+    if [ -z "$version" ]; then
+        echo "Error: No releases found for ${REPO}" >&2
+        echo "Please install from source or wait for the first release." >&2
+        exit 1
+    fi
+    
+    echo "$version"
 }
 
 download_binary() {
@@ -51,7 +74,22 @@ download_binary() {
     fi
     
     echo "Downloading ${BINARY_NAME} ${version} for ${os}/${arch}..."
-    curl -fsSL "$url" -o "/tmp/${BINARY_NAME}"
+    
+    if ! curl -fsSL "$url" -o "/tmp/${BINARY_NAME}"; then
+        echo "Error: Failed to download ${BINARY_NAME} from GitHub releases." >&2
+        echo "URL: $url" >&2
+        echo "" >&2
+        echo "This may mean:" >&2
+        echo "  1. The release ${version} doesn't exist" >&2
+        echo "  2. The binary for ${os}/${arch} isn't available" >&2
+        echo "  3. You're offline or GitHub is unreachable" >&2
+        echo "" >&2
+        echo "Please install from source instead:" >&2
+        echo "  git clone https://github.com/${REPO}.git" >&2
+        echo "  cd vyft && go build -o vyft" >&2
+        exit 1
+    fi
+    
     chmod +x "/tmp/${BINARY_NAME}"
 }
 
