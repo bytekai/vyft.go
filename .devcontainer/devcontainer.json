@@ -9,7 +9,11 @@
 
   "customizations": {
     "vscode": {
-      "extensions": ["golang.go", "editorconfig.editorconfig"],
+      "extensions": [
+        "golang.go",
+        "editorconfig.editorconfig",
+        "ms-vscode.makefile-tools"
+      ],
       "settings": {
         "go.useLanguageServer": true,
         "go.lintTool": "golangci-lint",

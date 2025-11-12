@@ -11,6 +11,26 @@ A fast, extensible CLI tool written in Go.
 
 ## Installation
 
+### Quick Install (Recommended)
+
+**Linux/macOS:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/vyftlabs/vyft/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+
+```powershell
+irm https://raw.githubusercontent.com/vyftlabs/vyft/main/install.ps1 | iex
+```
+
+To install a specific version, set the `VYFT_VERSION` environment variable:
+
+```bash
+VYFT_VERSION=v0.1.0 curl -fsSL https://raw.githubusercontent.com/vyftlabs/vyft/main/install.sh | bash
+```
+
 ### From Source
 
 ```bash
