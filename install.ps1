@@ -2,7 +2,7 @@
 
 $ErrorActionPreference = "Stop"
 
-$REPO = "vyftlabs/vyft"
+$REPO = "bytekai/vyft.go"
 $BINARY_NAME = "vyft"
 $VERSION = if ($env:VYFT_VERSION) { $env:VYFT_VERSION } else { "latest" }
 
@@ -19,8 +19,8 @@ function Get-LatestVersion {
         Write-Host "  3. You're offline or GitHub is unreachable"
         Write-Host ""
         Write-Host "Please install from source instead:"
-        Write-Host "  git clone https://github.com/${REPO}.git"
-        Write-Host "  cd vyft && go build -o vyft"
+        Write-Host "  git clone https://github.com/${REPO}"
+        Write-Host "  cd vyft.go && go build -o vyft"
         exit 1
     }
 }
@@ -79,8 +79,8 @@ function Install-Vyft {
         Write-Host "  3. You're offline or GitHub is unreachable"
         Write-Host ""
         Write-Host "Please install from source instead:"
-        Write-Host "  git clone https://github.com/${REPO}.git"
-        Write-Host "  cd vyft && go build -o vyft"
+        Write-Host "  git clone https://github.com/${REPO}"
+        Write-Host "  cd vyft.go && go build -o vyft"
         exit 1
     }
     

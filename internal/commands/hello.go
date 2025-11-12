@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/vyftlabs/vyft/internal/cli"
+	"github.com/bytekai/vyft.go/internal/cli"
 )
 
 type Hello struct {

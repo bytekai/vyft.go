@@ -2,7 +2,7 @@
 
 set -e
 
-REPO="vyftlabs/vyft"
+REPO="bytekai/vyft.go"
 BINARY_NAME="vyft"
 INSTALL_DIR="/usr/local/bin"
 USER_INSTALL_DIR="$HOME/.local/bin"
@@ -37,8 +37,8 @@ get_latest_version() {
         echo "  3. You're offline or GitHub is unreachable" >&2
         echo "" >&2
         echo "Please install from source instead:" >&2
-        echo "  git clone https://github.com/${REPO}.git" >&2
-        echo "  cd vyft && go build -o vyft" >&2
+        echo "  git clone https://github.com/${REPO}" >&2
+        echo "  cd vyft.go && go build -o vyft" >&2
         exit 1
     fi
     
@@ -85,8 +85,8 @@ download_binary() {
         echo "  3. You're offline or GitHub is unreachable" >&2
         echo "" >&2
         echo "Please install from source instead:" >&2
-        echo "  git clone https://github.com/${REPO}.git" >&2
-        echo "  cd vyft && go build -o vyft" >&2
+        echo "  git clone https://github.com/${REPO}" >&2
+        echo "  cd vyft.go && go build -o vyft" >&2
         exit 1
     fi
     

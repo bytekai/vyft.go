@@ -18,33 +18,33 @@ A fast, extensible CLI tool written in Go.
 **Linux/macOS:**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vyftlabs/vyft/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/bytekai/vyft.go/main/install.sh | bash
 ```
 
 **Windows (PowerShell):**
 
 ```powershell
-irm https://raw.githubusercontent.com/vyftlabs/vyft/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/bytekai/vyft.go/main/install.ps1 | iex
 ```
 
 To install a specific version, set the `VYFT_VERSION` environment variable:
 
 ```bash
-VYFT_VERSION=v0.1.0 curl -fsSL https://raw.githubusercontent.com/vyftlabs/vyft/main/install.sh | bash
+VYFT_VERSION=v0.1.0 curl -fsSL https://raw.githubusercontent.com/bytekai/vyft.go/main/install.sh | bash
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/vyftlabs/vyft.git
-cd vyft
+git clone https://github.com/bytekai/vyft.go.git
+cd vyft.go
 go build -o vyft
 ```
 
 ### Using Go Install
 
 ```bash
-go install github.com/vyftlabs/vyft@latest
+go install github.com/bytekai/vyft.go@latest
 ```
 
 ## Usage
@@ -119,7 +119,7 @@ package commands
 import (
     "flag"
     "fmt"
-    "github.com/vyftlabs/vyft/internal/cli"
+    "github.com/bytekai/vyft.go/internal/cli"
 )
 
 type MyCommand struct {

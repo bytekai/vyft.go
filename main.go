@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/vyftlabs/vyft/internal/cli"
-	"github.com/vyftlabs/vyft/internal/commands"
+	"github.com/bytekai/vyft.go/internal/cli"
+	"github.com/bytekai/vyft.go/internal/commands"
 )
 
 const version = "0.1.0"
