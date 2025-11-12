@@ -1,0 +1,29 @@
+{
+  "name": "vyft",
+  "image": "mcr.microsoft.com/devcontainers/go:1-1.25-bookworm",
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": ["golang.go", "editorconfig.editorconfig"],
+      "settings": {
+        "go.useLanguageServer": true,
+        "go.lintTool": "golangci-lint",
+        "go.lintOnSave": "workspace",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "go.toolsManagement.autoUpdate": true
+      }
+    }
+  },
+
+  "postCreateCommand": "go mod download",
+
+  "remoteUser": "vscode"
+}
